@@ -1,73 +1,81 @@
 # Breast Cancer Classification — Machine Learning Project
 
-**Projet de fin de semestre** — Module : Machine Learning & Data Mining  
-**Réalisé par :** Bayane TOUKI | **Encadré par :** Prof. Fahd Kalloubi
-
----
+Projet réalisé dans le cadre du module **Machine Learning & Data Mining**.
 
 ## Description
 
-Ce projet applique et compare 6 algorithmes de classification supervisée sur le dataset **Breast Cancer Wisconsin** afin de prédire si une tumeur est maligne ou bénigne. L'objectif est d'identifier le modèle le plus performant pour ce problème de diagnostic médical binaire.
+Ce projet compare plusieurs algorithmes de classification supervisée afin de prédire si une tumeur est **maligne** ou **bénigne** à partir du dataset **Breast Cancer Wisconsin (Diagnostic)**.
 
----
+L'objectif est d'évaluer les performances de différents modèles et d'identifier celui offrant la meilleure précision pour ce problème de classification binaire.
 
 ## Dataset
 
-**Breast Cancer Wisconsin (Diagnostic)**
-
-- Source : `sklearn.datasets.load_breast_cancer()`
-- 569 exemples — 30 features numériques
-- 2 classes : Maligne (0) / Bénigne (1)
-- Split : 80% entraînement (455 exemples) / 20% test (114 exemples) avec stratification
-
----
+* Dataset : Breast Cancer Wisconsin (Diagnostic)
+* Source : `sklearn.datasets.load_breast_cancer()`
+* 569 observations
+* 30 variables numériques
+* 2 classes : Maligne / Bénigne
+* Répartition : 80 % entraînement, 20 % test
 
 ## Prétraitement
 
-| Etape         | Détail                                                                                               |
-| ------------- | ---------------------------------------------------------------------------------------------------- |
-| Séparation    | `train_test_split` avec `stratify=y` (80/20)                                                         |
-| Normalisation | `StandardScaler` (moyenne=0, écart-type=1) — fit uniquement sur le train pour éviter le data leakage |
+* Division des données avec stratification
+* Normalisation des variables avec `StandardScaler`
+* Validation croisée à 5 folds pour évaluer la robustesse des modèles
 
----
+## Algorithmes évalués
 
-## Algorithmes implémentés
-
-| #   | Algorithme          | Paramètres clés                         |
-| --- | ------------------- | --------------------------------------- |
-| 1   | Decision Tree       | `max_depth=5`, critère Gini             |
-| 2   | Random Forest       | `n_estimators=100`, bagging             |
-| 3   | Logistic Regression | `max_iter=10000`, log-loss              |
-| 4   | KNN                 | `k=5`, distance Euclidienne             |
-| 5   | SVM Linéaire        | `kernel='linear'`                       |
-| 6   | AdaBoost            | `n_estimators=100`, boosting séquentiel |
-
----
+* Decision Tree
+* Random Forest
+* Logistic Regression
+* K-Nearest Neighbors (KNN)
+* Support Vector Machine (SVM)
+* AdaBoost
 
 ## Résultats
 
-| Rang | Algorithme          | Accuracy (Test) | Cross-Val 5-fold |
-| ---- | ------------------- | :-------------: | :--------------: |
-| 1    | Logistic Regression |     98.25%      |      98.02%      |
-| 2    | SVM Linéaire        |     97.37%      |      96.70%      |
-| 3    | Random Forest       |     95.61%      |      95.38%      |
-| 3    | AdaBoost            |     95.61%      |      97.36%      |
-| 3    | KNN (k=5)           |     95.61%      |      96.70%      |
-| 4    | Decision Tree       |     92.11%      |      93.19%      |
+| Algorithme          | Accuracy |
+| ------------------- | -------- |
+| Logistic Regression | 98.25 %  |
+| SVM Linéaire        | 97.37 %  |
+| Random Forest       | 95.61 %  |
+| AdaBoost            | 95.61 %  |
+| KNN                 | 95.61 %  |
+| Decision Tree       | 92.11 %  |
 
-**Meilleur modèle : Logistic Regression (98.25%)**
+### Meilleur modèle
 
-La Régression Logistique atteint la meilleure performance, confirmant l'adéquation d'un modèle linéaire pour ce dataset bien normalisé. Le SVM Linéaire tire profit de la séparabilité quasi-linéaire des classes dans l'espace de 30 dimensions.
+**Logistic Regression** obtient la meilleure performance avec une précision de **98.25 %** sur l'ensemble de test.
 
----
+Les résultats montrent qu'un modèle linéaire est particulièrement adapté à ce dataset, les classes étant presque linéairement séparables après normalisation.
 
-## Importance des Features (Random Forest)
+## Analyse des Features
 
-Les variables les plus discriminantes sont les worst values des caractéristiques géométriques : `worst radius`, `worst perimeter` et `worst area`. Ces résultats sont médicalement cohérents : les tumeurs malignes tendent à présenter des cellules de grande taille aux contours irréguliers.
+L'analyse de l'importance des variables avec Random Forest met en évidence :
 
----
+* Worst Radius
+* Worst Perimeter
+* Worst Area
 
-## Utilisation
+comme les caractéristiques les plus influentes dans la prédiction.
 
-Le notebook est conçu pour **Google Colab**. Aucune installation locale n'est nécessaire.
-Toutes les bibliothèques utilisées (`numpy`, `pandas`, `matplotlib`, `seaborn`, `scikit-learn`) sont disponibles par défaut dans Google Colab.
+## Technologies utilisées
+
+* Python
+* NumPy
+* Pandas
+* Matplotlib
+* Seaborn
+* Scikit-learn
+
+## Exécution
+
+Le projet a été exécuté directement sur **Google Colab**.
+
+Aucune installation supplémentaire n'est nécessaire.
+
+## Auteur
+
+**Bayane TOUKI**
+
+**Encadrant : Prof. Fahd Kalloubi**
